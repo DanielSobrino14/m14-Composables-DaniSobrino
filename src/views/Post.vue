@@ -5,13 +5,20 @@
     <div>{{ post.body }}</div>
   </div>
 </template>
+
 <script setup>
-const post = {
-  title:
-    "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-  body: "quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
-};
-const user = {
-  name: "Leanne Graham",
-};
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+import usePost from "../composables/UsePost.js";
+import useUser from "../composables/UseUser.js";
+
+const route = useRoute();
+const { post, llegirPost } = usePost();
+const { user, llegirUsuari } = useUser();
+
+onMounted(async () => {
+  const id = route.params.id;
+  await llegirPost(id);
+  if (post.value) await llegirUsuari(post.value.userId);
+});
 </script>
