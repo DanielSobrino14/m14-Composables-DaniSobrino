@@ -18,7 +18,7 @@ const { user, llegirUsuari } = useUser();
 
 onMounted(async () => {
   const id = route.params.id;
-  await llegirPost(id);
+  await llegirPost(id); 
   if (post.value) await llegirUsuari(post.value.userId);
 });
 </script>
